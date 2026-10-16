@@ -491,6 +491,110 @@
             100% { transform: scale(1); }
         }
 
+        /* ===== WISH CONFIRMATION MODAL ===== */
+        .wish-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(40, 15, 35, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wish-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .wish-modal-card {
+            background: linear-gradient(145deg, #ffffff, #fff5f8);
+            border-radius: 28px;
+            padding: 30px 22px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(255, 182, 193, 0.6);
+            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.35);
+            transform: scale(0.85);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .wish-modal-overlay.active .wish-modal-card {
+            transform: scale(1);
+        }
+
+        .wish-modal-icon {
+            font-size: 50px;
+            margin-bottom: 12px;
+            display: inline-block;
+            animation: heartbeat 1.5s ease infinite;
+        }
+
+        .wish-modal-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 25px;
+            color: var(--rose);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .wish-modal-text {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #5a3050;
+            margin-bottom: 22px;
+        }
+
+        .wish-modal-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .wish-confirm-btn {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .wish-confirm-btn:active {
+            transform: scale(0.95);
+        }
+
+        .wish-cancel-btn {
+            background: transparent;
+            color: #8b5a7e;
+            border: 1px solid rgba(139, 90, 126, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .wish-cancel-btn:active {
+            background: rgba(255, 182, 193, 0.2);
+        }
+
         /* ===== WISHES SECTION ===== */
         #wishes {
             background: linear-gradient(180deg, rgba(255,243,224,0.6), rgba(232,213,245,0.6));
@@ -1334,6 +1438,26 @@
         </div>
     </section>
 
+    <!-- ===== WISH CONFIRMATION MODAL ===== -->
+    <div id="wishModal" class="wish-modal-overlay">
+        <div class="wish-modal-card">
+            <span class="wish-modal-icon">🤫💭</span>
+            <h3 class="wish-modal-title">Wait a second, Divya! ✨</h3>
+            <p class="wish-modal-text">
+                Are you <strong>100% sure</strong> you made your wish?<br>
+                Close your eyes, make it count, and dream as big as you want! 💖🎂
+            </p>
+            <div class="wish-modal-btns">
+                <button class="wish-confirm-btn" onclick="confirmWishAndBlow()">
+                    Yes, I made it! Blow now! 🌬️🎉
+                </button>
+                <button class="wish-cancel-btn" onclick="closeWishModal()">
+                    Wait, let me think a sec 💭
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== PHOTO GALLERY SECTION ===== -->
     <section id="photo-gallery">
         <div class="reveal">
@@ -1694,7 +1818,25 @@
 
         // ===== BLOW CANDLES =====
         let candlesBlown = false;
+
         function blowCandles() {
+            if (candlesBlown) return;
+            // Cute warning before blowing candles!
+            const modal = document.getElementById('wishModal');
+            if (modal) {
+                modal.classList.add('active');
+            } else {
+                confirmWishAndBlow();
+            }
+        }
+
+        function closeWishModal() {
+            const modal = document.getElementById('wishModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function confirmWishAndBlow() {
+            closeWishModal();
             if (candlesBlown) return;
             candlesBlown = true;
 
@@ -1711,8 +1853,9 @@
                 partyBurst(window.innerWidth / 2, window.innerHeight / 2);
             }, 1000);
 
-            document.getElementById('blowBtn').textContent = '🎉 Wish Made!';
-            document.getElementById('blowBtn').style.background = 'linear-gradient(135deg, #ffd700, #ffb347)';
+            const blowBtn = document.getElementById('blowBtn');
+            blowBtn.textContent = '🎉 Wish Made!';
+            blowBtn.style.background = 'linear-gradient(135deg, #ffd700, #ffb347)';
         }
 
         // ===== PARTY BURST =====
