@@ -337,7 +337,7 @@
         .cake-container {
             position: relative;
             width: 220px;
-            height: 280px;
+            height: 360px;
             margin: 0 auto 30px;
         }
 
@@ -365,7 +365,7 @@
         .cake-layer-2 {
             width: 150px;
             height: 65px;
-            bottom: 65px;
+            bottom: 68px;
             background: linear-gradient(135deg, #a18cd1, #fbc2eb);
             box-shadow: 0 5px 20px rgba(161, 140, 209, 0.4);
         }
@@ -373,17 +373,19 @@
         .cake-layer-3 {
             width: 120px;
             height: 60px;
-            bottom: 125px;
+            bottom: 131px;
             background: linear-gradient(135deg, #ffecd2, #fcb69f);
             box-shadow: 0 5px 20px rgba(252, 182, 159, 0.4);
         }
 
         .cake-topper {
             position: absolute;
-            top: 20px;
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 50px;
+            font-size: 55px;
+            z-index: 10;
+            filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.5));
             animation: cakeTopperBounce 2s ease-in-out infinite;
         }
 
@@ -394,32 +396,35 @@
 
         .candles {
             position: absolute;
-            top: 55px;
+            top: 65px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 18px;
+            gap: 22px;
+            z-index: 5;
         }
 
         .candle {
-            width: 6px;
-            height: 35px;
+            width: 8px;
+            height: 42px;
             background: linear-gradient(to bottom, var(--gold), var(--pink));
-            border-radius: 3px;
+            border-radius: 4px;
             position: relative;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
         .flame {
             position: absolute;
-            top: -16px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
-            height: 16px;
-            background: radial-gradient(ellipse, #fff 0%, #ffd700 40%, #ff6b00 70%, transparent 100%);
+            width: 14px;
+            height: 20px;
+            background: radial-gradient(ellipse, #fff 0%, #ffd700 35%, #ff6b00 65%, transparent 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             animation: flicker 0.3s ease-in-out infinite alternate;
             transition: opacity 0.5s ease;
+            box-shadow: 0 0 12px 4px rgba(255, 200, 0, 0.5), 0 0 25px 8px rgba(255, 150, 0, 0.25);
         }
 
         .flame.blown {
@@ -457,12 +462,20 @@
         }
 
         .blow-msg {
-            margin-top: 15px;
+            margin-top: 20px;
             font-family: 'Dancing Script', cursive;
-            font-size: 22px;
+            font-size: 24px;
             color: var(--rose);
             opacity: 0;
             transition: opacity 0.5s ease;
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .blow-msg.show {
