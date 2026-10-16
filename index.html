@@ -962,11 +962,223 @@
             line-height: 1.8;
         }
 
-        .signature {
-            margin-top: 40px;
+        /* ===== PHOTO GALLERY SECTION ===== */
+        #photo-gallery {
+            background: linear-gradient(180deg, rgba(255,243,224,0.65), rgba(252,228,236,0.75));
+            padding: 50px 16px;
+            width: 100%;
+        }
+
+        .gallery-subtitle {
+            font-size: 14px;
+            color: var(--purple-dark);
+            margin-top: -15px;
+            margin-bottom: 25px;
+            text-align: center;
+            opacity: 0.85;
+        }
+
+        .photo-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 24px;
+            padding: 16px 16px 20px;
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.16), 0 4px 15px rgba(198, 120, 221, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+            border: 1px solid var(--pink-light);
+            color: var(--rose);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(255, 107, 157, 0.12);
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            background: #fdf0f4;
+            cursor: pointer;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: center 20%;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-card:active .photo-img {
+            transform: scale(1.02);
+        }
+
+        .photo-overlay-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            pointer-events: none;
+        }
+
+        .photo-compliment-box {
+            margin-top: 16px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, rgba(255, 245, 248, 0.95), rgba(248, 235, 255, 0.8));
+            border-radius: 16px;
+            border-left: 4px solid var(--pink);
+        }
+
+        .photo-compliment-text {
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: #4a2040;
+            font-weight: 400;
+        }
+
+        .photo-compliment-text strong {
+            color: var(--rose);
+            font-weight: 600;
+        }
+
+        .photo-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 182, 193, 0.4);
+        }
+
+        .photo-like-btn {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            border: none;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.35);
+            transition: transform 0.15s ease;
+        }
+
+        .photo-like-btn:active {
+            transform: scale(0.92);
+        }
+
+        .like-count-tag {
+            font-size: 13px;
+            color: var(--purple-dark);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Lightbox Modal */
+        .photo-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 10, 25, 0.93);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 11000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 92vw;
+            max-height: 80vh;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-caption {
+            color: var(--pink-light);
+            text-align: center;
+            margin-top: 15px;
             font-family: 'Dancing Script', cursive;
-            font-size: 22px;
-            color: var(--pink);
+            font-size: 24px;
+            padding: 0 15px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            font-size: 26px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ===== MUSIC TOGGLE ===== */
@@ -1121,6 +1333,97 @@
             <p class="blow-msg" id="blowMsg">🎉 Your wish will come true, Divya! 🌟</p>
         </div>
     </section>
+
+    <!-- ===== PHOTO GALLERY SECTION ===== -->
+    <section id="photo-gallery">
+        <div class="reveal">
+            <p class="section-title">✨ Divya's Spotlight ✨</p>
+            <p class="gallery-subtitle">Tap each photo to view & send love! 💖</p>
+            
+            <div class="photo-cards-container">
+                <!-- Photo 1: Purple Ethnic -->
+                <div class="photo-card reveal">
+                    <span class="photo-badge">👑 Desi Royalty & Grace</span>
+                    <div class="photo-frame" onclick="openLightbox('images/photo1.jpg', 'Desi Royalty — Pure Grace in Purple 💜')">
+                        <img src="images/photo1.jpg" alt="Divya in purple" class="photo-img" loading="lazy">
+                        <div class="photo-overlay-hint">🔍 Tap to expand</div>
+                    </div>
+                    <div class="photo-compliment-box">
+                        <p class="photo-compliment-text">
+                            "<strong>Draped in purple perfection!</strong> 💜 Divya, your elegance in ethnic wear is unmatched. That dazzling smile and traditional charm could outshine every star in the sky! Royal queen energy only."
+                        </p>
+                    </div>
+                    <div class="photo-actions">
+                        <button class="photo-like-btn" onclick="sendPhotoLove(this, event)">💖 Send Love</button>
+                        <span class="like-count-tag"><span class="heart-icon">💕</span> <span class="like-counter">1,248</span></span>
+                    </div>
+                </div>
+
+                <!-- Photo 2: Horse Riding -->
+                <div class="photo-card reveal">
+                    <span class="photo-badge">🐎 Fearless & Free Spirit</span>
+                    <div class="photo-frame" onclick="openLightbox('images/photo2.jpg', 'Fearless Explorer — Riding into Fairytales 🌸')">
+                        <img src="images/photo2.jpg" alt="Divya horse riding" class="photo-img" loading="lazy" style="object-position: center 30%;">
+                        <div class="photo-overlay-hint">🔍 Tap to expand</div>
+                    </div>
+                    <div class="photo-compliment-box">
+                        <p class="photo-compliment-text">
+                            "<strong>Unstoppable spirit, rain or shine!</strong> 🌧️💖 Riding through the misty hills with the most genuine, carefree laughter — you turn every gloomy day into an adventure full of sunshine."
+                        </p>
+                    </div>
+                    <div class="photo-actions">
+                        <button class="photo-like-btn" onclick="sendPhotoLove(this, event)">💖 Send Love</button>
+                        <span class="like-count-tag"><span class="heart-icon">💕</span> <span class="like-counter">1,420</span></span>
+                    </div>
+                </div>
+
+                <!-- Photo 3: Hello Kitty Cute -->
+                <div class="photo-card reveal">
+                    <span class="photo-badge">🎀 Cutest Soul in the Universe</span>
+                    <div class="photo-frame" onclick="openLightbox('images/photo3.jpg', 'Cutest in the World — To the Moon & Beyond 🌙')">
+                        <img src="images/photo3.jpg" alt="Divya Hello Kitty" class="photo-img" loading="lazy" style="object-position: center 15%;">
+                        <div class="photo-overlay-hint">🔍 Tap to expand</div>
+                    </div>
+                    <div class="photo-compliment-box">
+                        <p class="photo-compliment-text">
+                            "<strong>Cutest human alive alert!</strong> 🐱💕 Soft, sweet, and adorable beyond measure. Loved back to the moon, till where the universe ends, and even far beyond that!"
+                        </p>
+                    </div>
+                    <div class="photo-actions">
+                        <button class="photo-like-btn" onclick="sendPhotoLove(this, event)">💖 Send Love</button>
+                        <span class="like-count-tag"><span class="heart-icon">💕</span> <span class="like-counter">2,024</span></span>
+                    </div>
+                </div>
+
+                <!-- Photo 4: Navy Blue Chic -->
+                <div class="photo-card reveal">
+                    <span class="photo-badge">💙 Effortless Glamour & Stunner</span>
+                    <div class="photo-frame" onclick="openLightbox('images/photo4.jpg', 'Effortlessly Gorgeous — Million-Dollar Smile ✨')">
+                        <img src="images/photo4.jpg" alt="Divya smiling in navy" class="photo-img" loading="lazy" style="object-position: center 15%;">
+                        <div class="photo-overlay-hint">🔍 Tap to expand</div>
+                    </div>
+                    <div class="photo-compliment-box">
+                        <p class="photo-compliment-text">
+                            "<strong>Breathtakingly gorgeous without even trying!</strong> 💎 That signature smile and poised grace hold enough warmth to brighten anyone's universe. A true blend of beauty, warmth, and brilliance."
+                        </p>
+                    </div>
+                    <div class="photo-actions">
+                        <button class="photo-like-btn" onclick="sendPhotoLove(this, event)">💖 Send Love</button>
+                        <span class="like-count-tag"><span class="heart-icon">💕</span> <span class="like-counter">1,890</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LIGHTBOX MODAL ===== -->
+    <div id="photoLightbox" class="photo-lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightboxImg" src="" alt="Enlarged photo" class="lightbox-img">
+        </div>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
 
     <!-- ===== WISHES ===== -->
     <section id="wishes">
@@ -1684,6 +1987,43 @@
                     }
                 }
             });
+        }
+
+        // ===== PHOTO GALLERY LIGHTBOX & INTERACTIONS =====
+        function openLightbox(src, caption) {
+            const lightbox = document.getElementById('photoLightbox');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCaption');
+            img.src = src;
+            cap.textContent = caption;
+            lightbox.classList.add('active');
+            partyBurst(window.innerWidth / 2, window.innerHeight / 2);
+        }
+
+        function closeLightbox(e) {
+            const lightbox = document.getElementById('photoLightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function sendPhotoLove(btn, event) {
+            event.stopPropagation();
+            const counter = btn.parentElement.querySelector('.like-counter');
+            let current = parseInt(counter.textContent.replace(',', '')) || 1000;
+            current += 1;
+            counter.textContent = current.toLocaleString();
+
+            btn.style.transform = 'scale(0.88)';
+            setTimeout(() => btn.style.transform = 'scale(1)', 150);
+
+            // Trigger floating heart eruption from button location
+            const rect = btn.getBoundingClientRect();
+            partyBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createSparkle(rect.left + Math.random() * rect.width, rect.top - Math.random() * 40);
+                }, i * 80);
+            }
         }
     </script>
 </body>
